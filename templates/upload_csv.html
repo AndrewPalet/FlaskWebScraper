@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+
+      <h1 style="font-size: 45px;">Upload HIN CSV</h1>
+      <hr>
+
+      <body>
+        <p style="font-size: 30px;">Instructions:</p>
+        <ul>
+          <li>Must use <b>Google Chrome browser</b> for this application</li>
+          <li>File must be a csv file formatted exactly to this <a href="/download">template</a>. Leave the column header "HIN_NUM" and fill column A with your HIN numbers</li>
+          <li>Attach the file by clicking the "Select csv file" box below</li>
+          <li>After attaching your CSV file click the "Upload" button</li>
+          <li>Wait on the page till the application prompts you to download the finished file</li>
+        </ul>
+        <p style="font-size: 30px;">Tips:</p>
+        <ul>
+          <li>DO NOT Refresh the page when in the middle of processing a file</li>
+          <li>Larger files take longer processing time, wait until you're prompted to download the finished file before exiting the web page</li>
+          <li>Need to do another file? Refresh the web page to start another session</li>
+        </ul>
+      </body>
+  
+      <hr>
+
+      <form action="/upload-csv" method="POST" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label>Select CSV File</label>
+          <div class="custom-file">
+            <input oninput="filesize(this);" type="file" class="custom-file-input" name="csv" id="csv">
+            <label class="custom-file-label" for="csv">Select csv file...</label>
+          </div>
+        </div>
+        <button type="submit" id="btnFetch" class="btn btn-primary mb-2" onclick="$('#loading').show();">Upload</button>
+
+      </form>
+
+      <!-- <div id="loading" style="display:none;"><img src="/static/loading.gif" alt="" />Loading!</div> -->
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+  $(document).on('change', '.custom-file-input', function (event) {
+    $(this).next('.custom-file-label').html(event.target.files[0].name);
+  })
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#btnFetch").click(function() {
+      // disable button, important that disabled is "false"
+      //$(this).prop("disabled", false);
+      // add spinner to button
+      $(this).html(
+        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+      );
+      //$(this).fadeOut(10000);
+    });
+  });
+</script>
+
+<script>
+
+  function filesize(elem){
+
+    document.cookie = `filesize=${elem.files[0].size}`;
+  }
+
+</script>
+
+{% endblock %}
