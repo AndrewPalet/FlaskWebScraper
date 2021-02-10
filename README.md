@@ -10,7 +10,7 @@ Steps
 * Web app constructs a csv with the recently scraped information to be served back to the user
 * Completed csv is prompted to the user for download to their pc
 
-![Flask Web Scraper Screenshot](https://github.com/AndrewPalet/FlaskWebScraper/blob/main/static/img/WebAppScreenshot.PNG "Flask Web Scraper Screenshot")
+![Flask Web Scraper Screenshot](https://github.com/AndrewPalet/FlaskWebScraper/blob/master/static/img/WebAppScreenshot.PNG "Flask Web Scraper Screenshot")
 
 # Skills Demonstrated
     - Flask framework
